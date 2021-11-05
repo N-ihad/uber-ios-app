@@ -7,16 +7,14 @@
 
 import UIKit
 
-protocol LocationInputActivationViewDelegate: class {
+protocol LocationInputActivationViewDelegate: AnyObject {
     func presentLocationInputView()
 }
 
-class LocationInputActivationView: UIView {
-    
-    // MARK: - Properties
-    
+final class LocationInputActivationView: UIView {
+
     weak var delegate: LocationInputActivationViewDelegate?
-    
+
     private let indicatorView: UIView = {
         let indicatorView = UIView()
         indicatorView.backgroundColor = .black
@@ -24,52 +22,47 @@ class LocationInputActivationView: UIView {
         
         return indicatorView
     }()
-    
+
     private let placeholderLabel: UILabel = {
         let placeholderLabel = UILabel()
         placeholderLabel.text = "Where to?"
-        placeholderLabel.font = UIFont.systemFont(ofSize: 18)
+        placeholderLabel.font = .systemFont(ofSize: 18)
         placeholderLabel.textColor = .darkGray
         
         return placeholderLabel
     }()
-    
-    // MARK: - Lifecycle
-    
+
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        let inputLocationTap = UITapGestureRecognizer(target: self, action: #selector(presentLocationInputView))
-        addGestureRecognizer(inputLocationTap
-        )
-        configureUI()
+        setup()
+        layout()
+        style()
     }
     
     required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+        fatalError("init(coder:) has not been implemented. No storyboards")
+    }
+
+    private func setup() {
+        let inputLocationTap = UITapGestureRecognizer(target: self, action: #selector(presentLocationInputView))
+        addGestureRecognizer(inputLocationTap)
     }
     
-    // MARK: - Selectors
-    
-    @objc func presentLocationInputView() {
-        delegate?.presentLocationInputView()
-    }
-    
-    // MARK: - Helpers
-    
-    func configureUI() {
-        backgroundColor = .white
-        addShadow()
-        
-        configureSubviews()
-    }
-    
-    func configureSubviews() {
+    private func layout() {
         addSubview(indicatorView)
         indicatorView.centerY(inView: self, leftAnchor: leftAnchor, paddingLeft: 16)
         
         addSubview(placeholderLabel)
         placeholderLabel.centerY(inView: self, leftAnchor: indicatorView.rightAnchor, paddingLeft: 20)
     }
-    
+
+    private func style() {
+        backgroundColor = .white
+        addShadow()
+    }
+
+    @objc private func presentLocationInputView() {
+        delegate?.presentLocationInputView()
+    }
 }

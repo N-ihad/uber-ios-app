@@ -7,28 +7,23 @@
 
 import UIKit
 
-class CircularProgressView: UIView {
-    
-    // MARK: - Properties
-    
-    var progressLayer: CAShapeLayer!
-    var trackLayer: CAShapeLayer!
-    var pulsatingLayer: CAShapeLayer!
-    
-    // MARK: - Lifecycle
+final class CircularProgressView: UIView {
+
+    private var progressLayer: CAShapeLayer!
+    private var trackLayer: CAShapeLayer!
+    private var pulsatingLayer: CAShapeLayer!
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        configureCirlceLayers()
+
+        setup()
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
-    // MARK: - Helper Functions
-    
-    private func configureCirlceLayers() {
+
+    private func setup() {
         pulsatingLayer = circleShapeLayer(strokeColor: .clear, fillColor: .pulsatingFillColor)
         layer.addSublayer(pulsatingLayer)
         
@@ -45,10 +40,12 @@ class CircularProgressView: UIView {
         let layer = CAShapeLayer()
         
         let center = CGPoint(x: 0, y: 32)
-        let circularPath = UIBezierPath(arcCenter: center,
-                                        radius: self.frame.width / 2.5,
-                                        startAngle: -(.pi / 2), endAngle: 1.5 * .pi,
-                                        clockwise: true)
+        let circularPath = UIBezierPath(
+            arcCenter: center,
+            radius: frame.width / 2.5,
+            startAngle: -(.pi / 2), endAngle: 1.5 * .pi,
+            clockwise: true
+        )
         layer.path = circularPath.cgPath
         layer.strokeColor = strokeColor.cgColor
         layer.lineWidth = 12
@@ -72,7 +69,7 @@ class CircularProgressView: UIView {
     }
     
     func setProgressWithAnimation(duration: TimeInterval, value: Float,
-                                  completion: @escaping() -> Void) {
+                                  completion: (() -> Void)? = nil) {
         CATransaction.begin()
         CATransaction.setCompletionBlock(completion)
         
@@ -86,5 +83,4 @@ class CircularProgressView: UIView {
         
         CATransaction.commit()
     }
-    
 }

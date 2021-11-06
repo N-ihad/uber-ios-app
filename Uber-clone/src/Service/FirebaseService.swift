@@ -14,9 +14,9 @@ let REF_USERS = DB_REF.child("users")
 let REF_DRIVER_LOCATIONS = DB_REF.child("driver-locations")
 let REF_TRIPS = DB_REF.child("trips")
 
-struct Service {
+struct FirebaseService {
     
-    static let shared = Service()
+    static let shared = FirebaseService()
     
     private init() { }
     

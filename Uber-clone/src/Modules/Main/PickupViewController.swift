@@ -138,7 +138,7 @@ final class PickupViewController: UIViewController {
     }
 
     @objc private func handleAcceptTrip() {
-        Service.shared.acceptTrip(trip: trip) { error, ref in
+        FirebaseService.shared.acceptTrip(trip: trip) { error, ref in
             self.delegate?.didAcceptTrip(self.trip)
         }
     }

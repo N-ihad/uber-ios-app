@@ -107,7 +107,7 @@ final class HomeViewController: UIViewController {
     }
     
     private func observeCurrentTrip() {
-        Service.shared.observeCurrentTrip { trip in
+        FirebaseService.shared.observeCurrentTrip { trip in
             self.trip = trip
             
             if trip.state == .accepted {
@@ -120,7 +120,7 @@ final class HomeViewController: UIViewController {
     
     private func fetchUserData() {
         guard let currentUID = Auth.auth().currentUser?.uid else { return }
-        Service.shared.fetchUserData(uid: currentUID) { user in
+        FirebaseService.shared.fetchUserData(uid: currentUID) { user in
             self.user = user
         }
     }
@@ -128,7 +128,7 @@ final class HomeViewController: UIViewController {
     private func fetchDrivers() {
         guard let location = locationManager?.location else { return }
 
-        Service.shared.fetchDrivers(location: location) { driver in
+        FirebaseService.shared.fetchDrivers(location: location) { driver in
 
             guard let coordinate = driver.location?.coordinate else { return }
 
@@ -153,7 +153,7 @@ final class HomeViewController: UIViewController {
     }
     
     private func observeTrips() {
-        Service.shared.observeTrips { trip in
+        FirebaseService.shared.observeTrips { trip in
             self.trip = trip
         }
     }
@@ -517,7 +517,7 @@ extension HomeViewController: RideActionViewDelegate {
         
         shouldPresentLoadingView(true, message: "Finding you a ride..")
         
-        Service.shared.uploadTrip(pickupCoordinates, destinationCoordinates) { (err, ref) in
+        FirebaseService.shared.uploadTrip(pickupCoordinates, destinationCoordinates) { (err, ref) in
             if let error = err {
                 print("DEBUG: Failed to upload trip with error \(error)")
                 return

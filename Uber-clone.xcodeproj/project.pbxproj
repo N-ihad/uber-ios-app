@@ -27,7 +27,7 @@
 		2083366E25A47A37003C8A2E /* LocationInputActivationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2083366D25A47A37003C8A2E /* LocationInputActivationView.swift */; };
 		2083367125A494A9003C8A2E /* LocationInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2083367025A494A9003C8A2E /* LocationInputView.swift */; };
 		2083367425A4A871003C8A2E /* LocationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2083367325A4A871003C8A2E /* LocationCell.swift */; };
-		2083367725A4CBDF003C8A2E /* Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2083367625A4CBDF003C8A2E /* Service.swift */; };
+		2083367725A4CBDF003C8A2E /* FirebaseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2083367625A4CBDF003C8A2E /* FirebaseService.swift */; };
 		2083367A25A4D006003C8A2E /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2083367925A4D006003C8A2E /* User.swift */; };
 		2083367D25A4D337003C8A2E /* LocationHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2083367C25A4D337003C8A2E /* LocationHandler.swift */; };
 		2083368025A66C78003C8A2E /* DriverAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2083367F25A66C78003C8A2E /* DriverAnnotation.swift */; };
@@ -61,7 +61,7 @@
 		2083366D25A47A37003C8A2E /* LocationInputActivationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationInputActivationView.swift; sourceTree = "<group>"; };
 		2083367025A494A9003C8A2E /* LocationInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationInputView.swift; sourceTree = "<group>"; };
 		2083367325A4A871003C8A2E /* LocationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationCell.swift; sourceTree = "<group>"; };
-		2083367625A4CBDF003C8A2E /* Service.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Service.swift; sourceTree = "<group>"; };
+		2083367625A4CBDF003C8A2E /* FirebaseService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseService.swift; sourceTree = "<group>"; };
 		2083367925A4D006003C8A2E /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		2083367C25A4D337003C8A2E /* LocationHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationHandler.swift; sourceTree = "<group>"; };
 		2083367F25A66C78003C8A2E /* DriverAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DriverAnnotation.swift; sourceTree = "<group>"; };
@@ -106,12 +106,10 @@
 		201985922735A63800CD737C /* src */ = {
 			isa = PBXGroup;
 			children = (
-				208335D425A4205B003C8A2E /* AppDelegate.swift */,
-				208335D625A4205B003C8A2E /* SceneDelegate.swift */,
+				2047B0A62736F0E900B3181A /* Application */,
 				201985852735A18500CD737C /* Constants */,
-				208335ED25A420B4003C8A2E /* Model */,
-				208335EC25A420B1003C8A2E /* View */,
-				208335EB25A420B0003C8A2E /* Controller */,
+				208335ED25A420B4003C8A2E /* Entities */,
+				2047B0A72736F0FC00B3181A /* Modules */,
 				208335EA25A420AF003C8A2E /* Service */,
 				208335E925A420A3003C8A2E /* Utils */,
 			);
@@ -125,6 +123,56 @@
 				208335DF25A4205E003C8A2E /* LaunchScreen.storyboard */,
 			);
 			path = Resources;
+			sourceTree = "<group>";
+		};
+		2047B0A62736F0E900B3181A /* Application */ = {
+			isa = PBXGroup;
+			children = (
+				208335D425A4205B003C8A2E /* AppDelegate.swift */,
+				208335D625A4205B003C8A2E /* SceneDelegate.swift */,
+			);
+			path = Application;
+			sourceTree = "<group>";
+		};
+		2047B0A72736F0FC00B3181A /* Modules */ = {
+			isa = PBXGroup;
+			children = (
+				2047B0A82736F10800B3181A /* Authentication */,
+				2047B0AA2736F13400B3181A /* Main */,
+			);
+			path = Modules;
+			sourceTree = "<group>";
+		};
+		2047B0A82736F10800B3181A /* Authentication */ = {
+			isa = PBXGroup;
+			children = (
+				208335F925A45025003C8A2E /* AuthButton.swift */,
+				208335F025A42107003C8A2E /* LoginViewController.swift */,
+				208335F625A43ADE003C8A2E /* SignUpViewController.swift */,
+			);
+			path = Authentication;
+			sourceTree = "<group>";
+		};
+		2047B0AA2736F13400B3181A /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				2047B0AB2736F14900B3181A /* View */,
+				2083366A25A460ED003C8A2E /* HomeViewController.swift */,
+				20E77E6225AA432300342684 /* PickupViewController.swift */,
+			);
+			path = Main;
+			sourceTree = "<group>";
+		};
+		2047B0AB2736F14900B3181A /* View */ = {
+			isa = PBXGroup;
+			children = (
+				2019857F273592E400CD737C /* RideAction */,
+				20E77E6525AA803A00342684 /* CircularProgressView.swift */,
+				2083366D25A47A37003C8A2E /* LocationInputActivationView.swift */,
+				2083367025A494A9003C8A2E /* LocationInputView.swift */,
+				2083367325A4A871003C8A2E /* LocationCell.swift */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 		208335C825A4205B003C8A2E = {
@@ -165,7 +213,6 @@
 				201985882735A22F00CD737C /* UIView+AutoLayout.swift */,
 				2019858C2735A39D00CD737C /* UITextField.swift */,
 				201985902735A48600CD737C /* MKMapView+Zoom.swift */,
-				2083367C25A4D337003C8A2E /* LocationHandler.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -173,43 +220,20 @@
 		208335EA25A420AF003C8A2E /* Service */ = {
 			isa = PBXGroup;
 			children = (
-				2083367625A4CBDF003C8A2E /* Service.swift */,
+				2083367625A4CBDF003C8A2E /* FirebaseService.swift */,
+				2083367C25A4D337003C8A2E /* LocationHandler.swift */,
 			);
 			path = Service;
 			sourceTree = "<group>";
 		};
-		208335EB25A420B0003C8A2E /* Controller */ = {
-			isa = PBXGroup;
-			children = (
-				208335F025A42107003C8A2E /* LoginViewController.swift */,
-				208335F625A43ADE003C8A2E /* SignUpViewController.swift */,
-				2083366A25A460ED003C8A2E /* HomeViewController.swift */,
-				20E77E6225AA432300342684 /* PickupViewController.swift */,
-			);
-			path = Controller;
-			sourceTree = "<group>";
-		};
-		208335EC25A420B1003C8A2E /* View */ = {
-			isa = PBXGroup;
-			children = (
-				208335F925A45025003C8A2E /* AuthButton.swift */,
-				2083366D25A47A37003C8A2E /* LocationInputActivationView.swift */,
-				2083367025A494A9003C8A2E /* LocationInputView.swift */,
-				2083367325A4A871003C8A2E /* LocationCell.swift */,
-				2019857F273592E400CD737C /* RideAction */,
-				20E77E6525AA803A00342684 /* CircularProgressView.swift */,
-			);
-			path = View;
-			sourceTree = "<group>";
-		};
-		208335ED25A420B4003C8A2E /* Model */ = {
+		208335ED25A420B4003C8A2E /* Entities */ = {
 			isa = PBXGroup;
 			children = (
 				2083367925A4D006003C8A2E /* User.swift */,
 				2083367F25A66C78003C8A2E /* DriverAnnotation.swift */,
 				20E77E5F25AA350100342684 /* Trip.swift */,
 			);
-			path = Model;
+			path = Entities;
 			sourceTree = "<group>";
 		};
 		422DADB7CD1CC3C1FF2A6CDC /* Pods */ = {
@@ -366,7 +390,7 @@
 				208335F725A43ADE003C8A2E /* SignUpViewController.swift in Sources */,
 				2083368325A8706A003C8A2E /* RideActionView.swift in Sources */,
 				2083367A25A4D006003C8A2E /* User.swift in Sources */,
-				2083367725A4CBDF003C8A2E /* Service.swift in Sources */,
+				2083367725A4CBDF003C8A2E /* FirebaseService.swift in Sources */,
 				2083366E25A47A37003C8A2E /* LocationInputActivationView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
